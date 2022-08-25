@@ -92,3 +92,23 @@ npx prisma studio
 でデフォルトlocalhost:5050にGUIが開く。
 
 タイムゾーンが設定できていない。
+
+# 2022-08-25 20:30:24
+
+- [graphql \- npm](https://www.npmjs.com/package/graphql)
+- [apollo\-server\-micro \- npm](https://www.npmjs.com/package/apollo-server-micro)
+- [micro\-cors \- npm](https://www.npmjs.com/package/micro-cors)
+
+tagged template [Template literals \(Template strings\) \- JavaScript \| MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates)
+
+`/graphql/schema.ts` で定義した `Query` の型通りに `/graphql/resolvers.ts` に関数を定義する。
+
+> Body parsing is disabled here since it is handled by GraphQL.
+
+？
+
+DBのコネクションを節約するためローカルでは `global` オブジェクトに `Prisma Client` のインスタンスをくっつける。
+
+[Best practice for instantiating PrismaClient with Next\.js \| Prisma Docs](https://www.prisma.io/docs/guides/database/troubleshooting-orm/help-articles/nextjs-prisma-client-dev-practices)
+
+
