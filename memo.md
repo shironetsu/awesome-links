@@ -164,3 +164,44 @@ export const Link = objectType({
 ## 2022-08-25 23:19:08
 
 [GraphQL Cursor Connections Specification](https://relay.dev/graphql/connections.htm)
+
+## 2022-08-30 00:20:26
+
+```ts
+            orderBy: {
+              index: 'asc',
+            },
+```
+
+```ts
+const AllLinksQuery = gql`
+  query allLinksQuery($first: Int, $after: String) {
+    links(first: $first, after: $after) {
+      pageInfo {
+        endCursor
+        hasNextPage
+      }
+      edges {
+        cursor
+        node {
+          index
+          imageUrl
+          url
+          title
+          category
+          description
+          id
+        }
+      }
+    }
+  }
+`;
+```
+
+どちらも `index` となっている場所は`id` が正しい。
+
+`/api/graphql`　に送られるメソッドは `POST` ？ デバッグ方法がよく分からない。 `POST http://localhost:3000/api/graphql 400 (Bad Request)` とエラーメッセージが出た。
+
+apolloで見ると存在しないフィールド？に赤線が引かれるので分かる。
+
+`schema.graphql` はコミットしていいのだろうか。
