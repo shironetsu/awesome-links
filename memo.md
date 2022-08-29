@@ -93,7 +93,7 @@ npx prisma studio
 
 タイムゾーンが設定できていない。
 
-# 2022-08-25 20:30:24
+## 2022-08-25 20:30:24
 
 - [graphql \- npm](https://www.npmjs.com/package/graphql)
 - [apollo\-server\-micro \- npm](https://www.npmjs.com/package/apollo-server-micro)
@@ -112,3 +112,55 @@ DBのコネクションを節約するためローカルでは `global` オブ�
 [Best practice for instantiating PrismaClient with Next\.js \| Prisma Docs](https://www.prisma.io/docs/guides/database/troubleshooting-orm/help-articles/nextjs-prisma-client-dev-practices)
 
 
+## 2022-08-25 21:03:37
+
+SDL (Schema Definition Langauge).
+
+```ts
+export const schema = makeSchema({
+  types: [], //ここにgraphqlで扱うオブジェクトの型をリストする
+  outputs: {
+    typegen: join(process.cwd(), 'node_modules', '@types', 'nexus-typegen', 'index.d.ts'), //型ファイルを吐き出す場所
+    schema: join(process.cwd(), 'graphql', 'schema.graphql'), //スキーマを吐き出す場所
+  },
+  contextType: {
+    export: 'Context',
+    module: join(process.cwd(), 'graphql', 'context.ts'), //ここで定義された `Context` 型を使うという宣言
+  },
+})
+```
+
+GraphQLで扱うオブジェクトの型を（TSの）オブジェクトとして定義する。頭文字は大文字だがTSの型ではない。
+```ts
+// /graphql/types/Link.ts
+import { objectType, extendType } from 'nexus'
+import { User } from './User'
+
+export const Link = objectType({
+  name: 'Link',
+  definition(t) {
+    t.string('id')
+    t.string('title')
+    t.string('url')
+    t.string('description')
+    t.string('imageUrl')
+    t.string('category')
+    t.list.field('users', {
+      type: User,
+      async resolve(_parent, _args, ctx) {
+        return await ctx.prisma.link
+          .findUnique({
+            where: {
+              id: _parent.id,
+            },
+          })
+          .users()
+      },
+    })
+  },
+})
+```
+
+## 2022-08-25 23:19:08
+
+[GraphQL Cursor Connections Specification](https://relay.dev/graphql/connections.htm)
