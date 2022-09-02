@@ -205,3 +205,17 @@ const AllLinksQuery = gql`
 apolloで見ると存在しないフィールド？に赤線が引かれるので分かる。
 
 `schema.graphql` はコミットしていいのだろうか。
+
+途中までやっているスクラップ：https://zenn.dev/oshanqq/scraps/7940e9924dd7aa
+
+## 2022-09-03 00:35:49
+３章
+[Fullstack app with TypeScript, Next\.js, Prisma & GraphQL \- Authentication](https://www.prisma.io/blog/fullstack-nextjs-graphql-prisma-3-clxbrcqppv)
+
+[Auth0: Secure access for everyone\. But not just anyone\.](https://auth0.com/)
+
+"Regular Web Applications"を選択。
+
+`withApiAuthRequired` でapiのエンドポイントに認証を要求できる。
+
+[nextjs\-auth0/EXAMPLES\.md at main · auth0/nextjs\-auth0](https://github.com/auth0/nextjs-auth0/blob/main/EXAMPLES.md#protect-an-api-route)
